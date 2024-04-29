@@ -297,8 +297,8 @@ class ExaminationController extends Controller
         $data['getClass'] = ClassModel::getClass();
         $data['getExam'] = ExamModel::getExam();
 
-        $data['header_title'] = "Avaliation Schedule";
-        return view('admin.examinations.avaliation_schedule', $data);
+        $data['header_title'] = "Marks Register";
+        return view('admin.examinations.marks_register', $data);
 
     }
 
