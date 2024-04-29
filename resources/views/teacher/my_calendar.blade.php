@@ -49,34 +49,29 @@
 <script type="text/javascript">
     var events = new Array();
 
-    @foreach($getMyTimetable as $value)
-        @foreach($value['week'] as $week)
+    @foreach($getClassTimetable as $value)
         events.push({
-            title: '{{ $value['name'] }}',
-            daysOfWeek: ['{{ $week['fullcalendar_day'] }}'],
-            startTime: '{{ $week['start_time'] }}',
-            endTime: '{{ $week['end_time'] }}',
-            url: '{{ url('student/my_timetable') }}',
+            title: 'Class : {{ $value->class_name }} - {{ $value->subject_name }}',
+            daysOfWeek: [ {{ $value->fullcalendar_day}} ],
+            startTime: '{{ $value->start_time }}',
+            endTime: '{{ $value->end_time }}',
+            url: '{{ url('teacher/my_class_subject') }}',
         });
-
-
-        @endforeach
     @endforeach
 
-    @foreach($getExamTimetable as $valueE)
-        @foreach($valueE['exam'] as $exam)
-        events.push({
+    @foreach($getExamTimetable as $exam)
 
-            title: '{{ $valueE['name'] }} - {{ $exam['subject_name'] }} ({{ date('h:i A',strtotime($exam['start_time'])) }} to {{ date('h:i A',strtotime($exam['end_time'])) }})',
-            start : '{{ $exam['exam_date'] }}',
-            end : '{{ $exam['exam_date'] }}',
-            color : 'brown',
-            url: '{{ url('student/my_exam_timetable') }}',
+events.push({
+    title: 'Exam: {{ $exam->class_name }} - {{ $exam->subject_name }} - {{ $exam->subject_name }} ({{ date('h:i A', strtotime($exam->start_time)) }} to {{ date('h:i A', strtotime($exam->end_time)) }})',
+    start: '{{ $exam->exam_date }}T{{ date('H:i:s', strtotime($exam->start_time)) }}', // Assuming $exam->start_time and $exam->end_time contain both date and time
+    end: '{{ $exam->exam_date }}T{{ date('H:i:s', strtotime($exam->end_time)) }}',
+    color: 'brown',
+    url: '{{ url('teacher/my_exam_timetable') }}',
+});
 
-        });
+@endforeach
 
-        @endforeach
-    @endforeach
+
 
      var calendarEl = document.getElementById('calendar');
      var calendar = new FullCalendar.Calendar(calendarEl, {

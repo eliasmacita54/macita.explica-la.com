@@ -145,6 +145,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get(' admin/examinations/avaliation_schedule', [ExaminationController::class, 'avaliation_schedule']);
     Route::post(' admin/examinations/avaliation_schedule_insert', [ExaminationController::class, 'avaliation_schedule_insert']);
 
+    Route::get(' admin/examinations/marks_register', [ExaminationController::class, 'marks_register']);
+
+
 
 
 
@@ -160,7 +163,7 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('teacher/my_exam_timetable', [ExaminationController::class, 'MyExamTimeTableTeacher']);
 
-
+    Route::get('teacher/my_calendar', [CalendarController::class, 'MyCalendarTeacher' ]);
 
     Route::get('teacher/account', [UserController::class, 'MyAccount']);
     Route::post('teacher/account', [UserController::class, 'UpdateMyAccount']);
@@ -193,16 +196,20 @@ Route::group(['middleware' => 'admin'], function () {
 Route::group(['middleware' => 'parent'], function () {
     Route::get('parent/dashboard', [DashboardController::class, 'Dashboard']);
 
+    Route::get('/parent/my_student/calendar/{student_id}', [CalendarController::class, 'MyCalendarParent' ]);
+
+    Route::get('parent/my_student/subject/{student_id}', [SubjectController::class, 'ParentStudentsubject' ]);
+    Route::get('parent/my_student/exam_timetable/{student_id}', [ExaminationController::class, 'ParentMyExamTimetable' ]);
+    Route::get('parent/my_student/subject/class_timetable/{class_id}/{subject_id}/{student_id}', [ClassTimetableController::class, 'MyTimetableParent' ]);
+    Route::get('parent/my_student/subject/exam_timetable/{subject_id}', [ExaminationController::class, 'ParentMyExamTimetable' ]);
+
     Route::get('parent/account', [UserController::class, 'MyAccount']);
     Route::post('parent/account', [UserController::class, 'UpdateMyAccountParent']);
 
     Route::get('parent/change_password', [UserController::class, 'change_password']);
     Route::post('parent/change_password', [UserController::class, 'update_change_password']);
 
-    Route::get('parent/my_student/subject/{student_id}', [SubjectController::class, 'ParentStudentsubject' ]);
-    Route::get('parent/my_student/exam_timetable/{student_id}', [ExaminationController::class, 'ParentMyExamTimetable' ]);
-    Route::get('parent/my_student/subject/class_timetable/{class_id}/{subject_id}/{student_id}', [ClassTimetableController::class, 'MyTimetableParent' ]);
-    Route::get('parent/my_student/subject/exam_timetable/{subject_id}', [ExaminationController::class, 'ParentMyExamTimetable' ]);
+
 
 
 

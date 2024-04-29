@@ -292,6 +292,16 @@ class ExaminationController extends Controller
         return view('parent.my_exam_timetable', $data);
     }
 
+    public function marks_register(Request $request)
+    {
+        $data['getClass'] = ClassModel::getClass();
+        $data['getExam'] = ExamModel::getExam();
+
+        $data['header_title'] = "Avaliation Schedule";
+        return view('admin.examinations.avaliation_schedule', $data);
+
+    }
+
 }
 
 
