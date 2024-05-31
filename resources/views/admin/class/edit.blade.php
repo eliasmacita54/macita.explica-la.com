@@ -2,6 +2,9 @@
     @section('style')
     <style type="text/css">
     </style>
+    @endsection
+
+@section('content')
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -9,7 +12,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Class</h1>
+            <h1>Editar Turma</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -23,43 +26,34 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
-
-              <!-- /.card-header -->
               <!-- form start -->
               <form method="post" action="">
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Class Name</label>
-                    <input type="text" class="form-control" name="name" value="{{ $getRecord->name }}" required placeholder="Class name">
+                    <label>Nome da Turma</label>
+                    <input type="text" class="form-control" name="name" value="{{ $getRecord->name }}" required placeholder="Nome da turma">
                   </div>
                   <div class="form-group">
                     <label>Status</label>
-                    <Select class="form-control" name="status">
-                        <option {{ ($getRecord->status == 0) ? 'selected' : '' }} value="0">active</option>
-                        <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">Inactive</option>
-                    </Select>
-
+                    <select class="form-control" name="status">
+                        <option {{ ($getRecord->status == 0) ? 'selected' : '' }} value="0">Ativo</option>
+                        <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">Inativo</option>
+                    </select>
                   </div>
-
-
-            </div>
+                </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Update</button>
+                  <button type="submit" class="btn btn-primary">Atualizar</button>
                 </div>
               </form>
             </div>
-
+          </div>
         </div>
-    </div>
-
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
+</div>
 
-   @section('content')
-
-  @endsection
+@endsection

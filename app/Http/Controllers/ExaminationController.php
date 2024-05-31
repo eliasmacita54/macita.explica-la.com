@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ExamScheduleModel;
 use App\Models\User;
 
-
-
 class ExaminationController extends Controller
 {
        public function exam_list()
@@ -297,12 +295,20 @@ class ExaminationController extends Controller
         $data['getClass'] = ClassModel::getClass();
         $data['getExam'] = ExamModel::getExam();
 
-        $data['header_title'] = "Avaliation Schedule";
-        return view('admin.examinations.avaliation_schedule', $data);
+        if(!empty($request->get('exam_id')) && !empty($request->get('class_id')))
+        {
+            $data['getSubject'] = ExamScheduleModel::getSubject($request->get('exam_id'), $request->get('class_id'));
+            $data['getStudent'] = User::getStudentClass($request->get('class_id'));
+            //dd($data['getStudent']);
+
+        }
+        $data['header_title'] = "Marks Register";
+        return view('admin.examinations.marks_register', $data);
+    }
+
+    public function submit_marks_register()
+    {
 
     }
 
 }
-
-
-

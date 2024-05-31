@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>add Admin</h1>
+            <h1>Adicionar Administrador</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -32,23 +32,23 @@
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Name</label>
+                    <label>Nome</label>
                     <input type="text" class="form-control" name="name" value="{{old('name')}}" required placeholder="Name">
                   </div>
                   <div class="form-group">
-                    <label >Email</label>
+                    <label >Correio Eletronico</label>
                     <input type="email" class="form-control" name="email" value="{{old('email')}}" required placeholder="Enter email">
                    <div style= "color:red"> {{ $errors->first('email') }}</div>
                   </div>
                   <div class="form-group">
-                    <label for="">Password</label>
+                    <label for="">Palavra-Passe</label>
                     <input type="password" class="form-control" name="password" required placeholder="Password">
                 </div>
             </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
               </form>
             </div>

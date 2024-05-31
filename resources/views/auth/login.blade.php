@@ -22,12 +22,12 @@
       <a href="" class="h1"><b>SigaESSG</b></a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Bem-vindo!</p>
         @include('_message')
       <form action="{{url('login')}}" method="post">
         {{ csrf_field() }}
         <div class="input-group mb-3">
-          <input type="email" class="form-control" required name="email" placeholder="email">
+          <input type="email" class="form-control" required name="email" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="password">
+          <input type="password" class="form-control" name="password" placeholder="********">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -47,7 +47,7 @@
             <div class="icheck-primary">
               <input type="checkbox" id="remember" name="remember">
               <label for="remember">
-                Remember Me
+                lembre-me
               </label>
             </div>
           </div>
@@ -62,7 +62,7 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="{{url('forgot-password')}}">I forgot my password</a>
+        <a href="{{url('forgot-password')}}">Esqueceu a senha?</a>
       </p>
 
     </div>

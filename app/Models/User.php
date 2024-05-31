@@ -172,7 +172,7 @@ static public function getParent()
 
             $return = $return->orderBy('users.id', 'desc')
                             ->paginate(20);
-                                                        
+
             return $return;
         }
     }
@@ -245,7 +245,7 @@ return $return;
 
           if (!empty(Request::get('gender'))) {
             $return = $return->where('users.gender','=', Request::get('gender'));
-          } 
+          }
 
           if (!empty(Request::get('mobile_number'))) {
             $return = $return->where('users.mobile_number', 'like', '%' .Request::get('mobile_number'). '%');
@@ -287,7 +287,20 @@ return $return;
 return $return;
 
     }
-    
+
+    static public function getStudentClass($class_id)
+    {
+        $return = self::select('users.*')
+        ->where('users.user_type','=', 3)
+        ->where('users.is_delete','=', 0)
+        ->where('users.class_id','=',$class_id)
+        ->orderBy('users.id', 'desc')
+        ->get();
+
+return $return;
+
+    }
+
 
     public function getTeacherStudent()
     {

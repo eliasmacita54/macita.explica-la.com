@@ -1,7 +1,9 @@
 @extends('layouts.app')
-    @section('style')
-    <style type="text/css">
-    </style>
+
+@section('style')
+<style type="text/css">
+</style>
+@endsection
 
 @section('content')
 
@@ -11,7 +13,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>add Avaliations</h1>
+            <h1>Adicionar Avaliações</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -25,37 +27,33 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
-
               <!-- /.card-header -->
               <!-- form start -->
               <form method="post" action="">
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Avaliation Name</label>
-                    <input type="text" class="form-control" name="name" value="{{old('name')}}" required placeholder="Name">
+                    <label>Nome da Avaliação</label>
+                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" required placeholder="Nome">
                   </div>
                   <div class="form-group">
-                    <label >Note</label>
-                    <textarea class="form-control " name="note" placeholder="Note"></textarea>
-            </div>
+                    <label>Nota</label>
+                    <textarea class="form-control" name="note" placeholder="Nota"></textarea>
+                  </div>
+                </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
               </form>
             </div>
-
+          </div>
         </div>
-    </div>
-
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
+</div>
 
-
-
-  @endsection
+@endsection

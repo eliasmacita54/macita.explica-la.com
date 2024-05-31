@@ -1,7 +1,7 @@
 @extends('layouts.app')
-    @section('style')
-    <style type="text/css">
-    </style>
+@section('style')
+<style type="text/css">
+</style>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Admin</h1>
+            <h1>Editar Administrador</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -30,23 +30,23 @@
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" name="name" value="{{ old('name' , $getRecord->name) }}" required placeholder="Name">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" name="name" value="{{ old('name', $getRecord->name) }}" required placeholder="Nome">
                   </div>
                   <div class="form-group">
-                    <label >Email</label>
-                    <input type="email" class="form-control" name="email" value="{{ old('email' , $getRecord->email) }}" required placeholder="Enter email">
-                    <div style= "color:red"> {{ $errors->first('email') }}</div>
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" value="{{ old('email', $getRecord->email) }}" required placeholder="Digite o email">
+                    <div style="color:red"> {{ $errors->first('email') }}</div>
                   </div>
                   <div class="form-group">
-                    <label for="">Password</label>
-                    <input type="text" class="form-control" name="password"  placeholder="Password">
-                    <p>Do you wanto to change a password add, if not just leave blank</p>
+                    <label for="">Senha</label>
+                    <input type="text" class="form-control" name="password" placeholder="Senha">
+                    <p>Se você quiser alterar a senha, adicione uma nova. Caso contrário, deixe em branco.</p>
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Update</button>
+                  <button type="submit" class="btn btn-primary">Atualizar</button>
                 </div>
               </form>
             </div>
@@ -60,6 +60,6 @@
     <!-- /.content -->
   </div>
 
-   @section('content')
+@section('content')
 
-  @endsection
+@endsection

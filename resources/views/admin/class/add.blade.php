@@ -2,6 +2,7 @@
     @section('style')
     <style type="text/css">
     </style>
+    @endsection
 
 @section('content')
 
@@ -11,7 +12,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>add Class</h1>
+            <h1>Adicionar Turma</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -32,33 +33,28 @@
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Class Name</label>
-                    <input type="text" class="form-control" name="name" required placeholder="Class name">
+                    <label>Nome da Turma</label>
+                    <input type="text" class="form-control" name="name" required placeholder="Nome da turma">
                   </div>
                   <div class="form-group">
                     <label>Status</label>
-                    <Select class="form-control" name="status">
-                        <option value="0">active</option>
-                        <option value="1">inactive</option>
-                    </Select>
-
+                    <select class="form-control" name="status">
+                        <option value="0">Ativo</option>
+                        <option value="1">Inativo</option>
+                    </select>
                   </div>
-
-
-            </div>
+                </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
               </form>
             </div>
-
+          </div>
         </div>
-    </div>
-
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
-  @endsection
+</div>
+@endsection

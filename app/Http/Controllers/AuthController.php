@@ -41,7 +41,7 @@ class AuthController extends Controller
                     return redirect('/');
             }
         } else {
-            return redirect()->back()->with('error', 'Please enter correct email and password');
+            return redirect()->back()->with('error', 'Por favor, introduza email e password correctos!');
         }
     }
 
@@ -63,9 +63,9 @@ class AuthController extends Controller
        Mail::to($user->email)->send(new ForgotPasswordMail($user));
 
 
-        return redirect()->back()->with('success', 'Check your email address');
+        return redirect()->back()->with('success', 'Veja a sua caixa de email!');
     } else {
-        return redirect()->back()->with('error', 'Email not found in the system');
+        return redirect()->back()->with('error', 'Email não registado!');
     }
 }
 public function reset($remember_token)

@@ -4,13 +4,15 @@
     </style>
     @endsection
 
+@section('content')
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Class</h1>
+            <h1>Editar Turma</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -31,18 +33,17 @@
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Class Name</label>
+                    <label>Nome da Turma</label>
                     <select class="form-control" name="class_id" required>
-                        <option value="">Select Class</option>
+                        <option value="">Selecione a Turma</option>
                         @foreach($getClass as $class)
                         <option {{ ($getRecord->class_id == $class->id) ? 'selected' : ''  }} value="{{ $class->id }}">{{ $class->name }}</option>
                         @endforeach
                     </select>
-
                   </div>
 
                   <div class="form-group">
-                    <label>Subject Name</label>
+                    <label>Nome da Disciplina</label>
                     @foreach($getSubject as $subject)
                     @php
                         $checked = '';
@@ -60,35 +61,28 @@
                         </label>
                     </div>
                     @endforeach
-                </div>
-
-                  <div class="form-group">
-                    <label>Subject Name</label>
-                    <select class="form-control" name="status">
-                        <option {{ ($getRecord->status == 0) ? 'selected' : ''  }} value="0">active</option>
-                        <option {{ ($getRecord->status == 1) ? 'selected' : ''  }} value="1">Inective</option>
-                    </select>
-
                   </div>
 
-
-            </div>
+                  <div class="form-group">
+                    <label>Status</label>
+                    <select class="form-control" name="status">
+                        <option {{ ($getRecord->status == 0) ? 'selected' : ''  }} value="0">Ativo</option>
+                        <option {{ ($getRecord->status == 1) ? 'selected' : ''  }} value="1">Inativo</option>
+                    </select>
+                  </div>
+                </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
               </form>
             </div>
-
+          </div>
         </div>
-    </div>
-
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
+</div>
 
-   @section('content')
-
-  @endsection
+@endsection

@@ -142,15 +142,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/examinations/exam/edit/{id}', [ExaminationController::class, 'exam_update']);
     Route::get('admin/examinations/exam/delete/{id}', [ExaminationController::class, 'exam_delete']);
 
-    Route::get(' admin/examinations/avaliation_schedule', [ExaminationController::class, 'avaliation_schedule']);
-    Route::post(' admin/examinations/avaliation_schedule_insert', [ExaminationController::class, 'avaliation_schedule_insert']);
+    Route::get('admin/examinations/avaliation_schedule', [ExaminationController::class, 'avaliation_schedule']);
+    Route::post('admin/examinations/avaliation_schedule_insert', [ExaminationController::class, 'avaliation_schedule_insert']);
 
-    Route::get(' admin/examinations/marks_register', [ExaminationController::class, 'marks_register']);
-
-
-
-
-
+    Route::get('admin/examinations/marks_register', [ExaminationController::class, 'marks_register']);
+    Route::get('admin/examinations/submit_marks_register', [ExaminationController::class, 'submit_marks_register']);
+    
+    
 });
 
     //Teacher Route
