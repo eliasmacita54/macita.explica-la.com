@@ -1,11 +1,11 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; 2023-2024 <a href="">eliasmacita54@gmail.com</a>.</strong>
-    All rights reserved, @macitajr14 LTD.
+    <strong>Direitos de Autor &copy; 2023-2024 <a href="mailto:macitajr@gmail.com">***</a>.</strong>
+    Todos os direitos reservados. @ LTD.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
+      <b>Versão:</b> 3.2.0
     </div>
-  </footer>
+</footer>
 
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- O conteúdo da barra lateral de controle vai aqui -->
+</aside>

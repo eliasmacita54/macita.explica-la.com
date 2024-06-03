@@ -1,76 +1,70 @@
 @extends('layouts.app')
-    @section('style')
-    <style type="text/css">
-    </style>
+
+@section('style')
+<style type="text/css">
+</style>
+@endsection
 
 @section('content')
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- Cabeçalho do Conteúdo (Cabeçalho da Página) -->
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Edit Subject</h1>
-          </div>
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Editar Matéria</h1>
+                </div>
+            </div>
         </div>
-      </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
+    <!-- Conteúdo Principal -->
     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-          @include('_message')
-            <!-- general form elements -->
-            <div class="card card-primary">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Coluna Esquerda -->
+                <div class="col-md-12">
+                    @include('_message')
+                    <!-- Elementos do Formulário Geral -->
+                    <div class="card card-primary">
+                        <!-- Início do Formulário -->
+                        <form method="post" action="">
+                            {{ csrf_field() }}
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Nome da Disciplina</label>
+                                    <input type="text" class="form-control" name="name" value="{{ Request::get('name') }}" required placeholder="Nome da Disciplina">
+                                </div>
 
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form method="post" action="">
-                {{ csrf_field() }}
-                <div class="card-body">
-                  <div class="form-group">
-                    <label>subject Name</label>
-                    <input type="text" class="form-control" name="name" value="{{ Request::get('name') }}" required placeholder="Class name">
-                  </div>
+                                <div class="form-group">
+                                    <label>Tipo de Matéria</label>
+                                    <select class="form-control" name="type" required>
+                                        <option value="">Selecione o Tipo</option>
+                                        <option value="Theory">Teoria</option>
+                                        <option value="Practical">Prática</option>
+                                    </select>
+                                </div>
 
-                  <div class="form-group">
-                    <label>Subject Type</label>
-                    <Select class="form-control" name="type" required>
-                        <option value="">Select Type</option>
-                        <option value="Theory">Theory</option>
-                        <option value="Pratical">Pratical</option>
-                    </Select>
-
-                  </div>
-
-                  <div class="form-group">
-                    <label>Status</label>
-                    <Select class="form-control" name="status">
-                        <option value="0">active</option>
-                        <option value="1">Inactive</option>
-                    </Select>
-
-                  </div>
-
-
-            </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select class="form-control" name="status">
+                                        <option value="0">Ativo</option>
+                                        <option value="1">Inativo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-              </form>
             </div>
-
+            <!-- /.row -->
         </div>
-    </div>
-
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
-  @endsection
+</div>
+@endsection

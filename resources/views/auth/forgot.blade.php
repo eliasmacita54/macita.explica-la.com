@@ -19,7 +19,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="" class="h2"><b>SigaESSG</b></a>
+      <a href="" class="h2"><b>AcademIQ</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Forgot Password</p>

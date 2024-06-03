@@ -1,7 +1,9 @@
 @extends('layouts.app')
-    @section('style')
-    <style type="text/css">
-    </style>
+
+@section('style')
+<style type="text/css">
+</style>
+@endsection
 
 @section('content')
 
@@ -11,7 +13,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>add Avaliations</h1>
+            <h1>Editar Avaliação</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -32,17 +34,18 @@
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Avaliation Name</label>
-                    <input type="text" class="form-control" name="name" value="{{ $getRecord->name }}" required placeholder="Name">
+                    <label>Nome da Avaliação</label>
+                    <input type="text" class="form-control" name="name" value="{{ $getRecord->name }}" required placeholder="Nome">
                   </div>
                   <div class="form-group">
-                    <label >Note</label>
-                    <textarea class="form-control " name="note" {{ $getRecord->note }} placeholder="Note"></textarea>
-            </div>
+                    <label>Nota</label>
+                    <textarea class="form-control" name="note" placeholder="Nota">{{ $getRecord->note }}</textarea>
+                  </div>
+                </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Update</button>
+                  <button type="submit" class="btn btn-primary">Atualizar</button>
                 </div>
               </form>
             </div>
@@ -56,6 +59,4 @@
     <!-- /.content -->
   </div>
 
-
-
-  @endsection
+@endsection

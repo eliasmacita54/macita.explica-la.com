@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add New Assign Class Teacher</h1>
+            <h1>Adicionar Novo Professor para Turma</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -32,53 +32,45 @@
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Class Name</label>
+                    <label>Nome da Turma</label>
                     <select class="form-control" name="class_id" required>
-                        <option value="">Select Class</option>
+                        <option value="">Selecionar Turma</option>
                         @foreach($getClass as $class)
                         <option value="{{ $class->id }}">{{ $class->name }}</option>
                         @endforeach
                     </select>
-
                   </div>
 
                   <div class="form-group">
-                    <label>Teacher Name</label>
-                        @foreach($getTeacher as $teacher)
-                        <div>
+                    <label>Nome do Professor</label>
+                    @foreach($getTeacher as $teacher)
+                    <div>
                         <label style="font-weight: normal;">
                             <input type="checkbox" value="{{ $teacher->id }}" name="teacher_id[]"> {{ $teacher->name }} {{ $teacher->last_name }}
                         </label>
                     </div>
-                        @endforeach
-
-
+                    @endforeach
                   </div>
 
                   <div class="form-group">
-                    <label>status</label>
+                    <label>Status</label>
                     <select class="form-control" name="status">
-                        <option value="0">active</option>
-                        <option value="1">unactive</option>
+                        <option value="0">Ativo</option>
+                        <option value="1">Inativo</option>
                     </select>
-
                   </div>
-
-
-            </div>
+                </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
               </form>
             </div>
-
         </div>
     </div>
-
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  @endsection
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+@endsection

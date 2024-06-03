@@ -1,175 +1,161 @@
 @extends('layouts.app')
-    @section('style')
-    <style type="text/css">
-    </style>
-    @section('content')
+
+@section('style')
+<style type="text/css">
+</style>
+@endsection
+
+@section('content')
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- Cabeçalho do Conteúdo (Cabeçalho da Página) -->
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>add New Student</h1>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Lista de Estudantes do Pai ({{ $getParent->name}} {{ $getParent->last_name}})</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
+    <!-- Conteúdo Principal -->
     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-          @include('_message')
-            <!-- general form elements -->
-            <div class="card card-primary">
-                <form method="post" action=""  enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label>Name<span style="color: red;"> *</span> </label>
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}" required placeholder="First Name">
-                                <div style="color: red">{{ $errors->first('name') }}</div>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Pesquisar Estudante</h3>
+                        </div>
+                        <form method="get" action="">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-3">
+                                        <label>ID do Estudante</label>
+                                        <input type="text" class="form-control" name="id" value="{{ Request::get('id')}}" placeholder="ID do Estudante">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Nome</label>
+                                        <input type="text" class="form-control" name="name" value="{{ Request::get('name')}}" placeholder="Nome">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Sobrenome</label>
+                                        <input type="text" class="form-control" name="last_name" value="{{ Request::get('last_name')}}" placeholder="Sobrenome">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Corrreio Electronico</label>
+                                        <input type="text" class="form-control" name="email" value="{{ Request::get('email')}}" placeholder="Digite o email">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <button class="btn btn-primary" type="submit" style="margin-top:30px;">Pesquisar</button>
+                                        <a href="{{ url('admin/parent/my-student/' .$parent_id) }}" class="btn btn-success" style="margin-top:30px;">Resetar</a>
+                                    </div>
+                                </div>
                             </div>
+                        </form>
+                    </div>
 
-                            <div class="form-group col-md-6">
-                                <label>Last Name<span style="color: red;"> *</span></label>
-                                <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required placeholder="Last Name">
-                                <div style="color: red">{{ $errors->first('last_name') }}</div>
-                            </div>
+                    @include('_message')
 
-                            <div class="form-group col-md-6">
-                                <label>Admission Number<span style="color: red;"> *</span></label>
-                                <input type="text" class="form-control" name="admission_number" value="{{ old('admission_number') }}" required placeholder="Admission Number">
-                                <div style="color: red">{{ $errors->first('admission_number ') }}</div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Roll Number<span style="color: red;"> *</span></label>
-                                <input type="text" class="form-control" name="roll_number" value="{{ old('roll_number') }}" required placeholder="Roll Number">
-                                <div style="color: red">{{ $errors->first('roll_number') }}</div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Class<span style="color: red;"> *</span></label>
-                                <select class="form-control" required name="class_id">
-                                    <option value="">Select Class</option>
-                                    @foreach ($getClass as $class)
-                                        <option  {{ (old('class_id ') == $class->id ) ? 'selected' : '' }}  value="{{ $class->id }}">{{ $class->name }}</option>
+                    <!-- /.card -->
+                    @if(!empty($getSeachStudent))
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Lista de Estudantes</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Foto de Perfil</th>
+                                        <th>Nome do Estudante</th>
+                                        <th>Email</th>
+                                        <th>Nome do Pai</th>
+                                        <th>Data de Criação</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($getSeachStudent as $value)
+                                    <tr>
+                                        <td>{{$value->id}}</td>
+                                        <td>
+                                            @if(!empty($value->getProfile()))
+                                            <img src="{{ $value->getProfile() }}" style="width: 50px; width: 50px; border-radius: 50%">
+                                            @endif
+                                        </td>
+                                        <td>{{$value->name}} {{ $value->last_name}}</td>
+                                        <td>{{$value->email}}</td>
+                                        <td>{{$value->parent_name}}</td>
+                                        <td>{{date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
+                                        <td style="min-width: 150px;">
+                                            <a href="{{ url('admin/parent/assign_student_parent/'.$value->id.'/'.$parent_id) }}" class="btn btn-primary btn-sm">Adicionar Estudante ao Pai</a>
+                                        </td>
+                                    </tr>
                                     @endforeach
-                                </select>
-                                <div style="color: red">{{ $errors->first('class_id') }}</div>
+                                </tbody>
+                            </table>
+                            <div style="padding: 10px; float: right;">
                             </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Gender<span style="color: red;"> *</span></label>
-                                <select class="form-control" required name="gender">
-                                    <option value="">Select Gender</option>
-                                    <option  {{ (old('gender') == 'Male') ? 'selected' : '' }} value="Male">Male</option>
-                                    <option  {{ (old('gender') == 'Female') ?  'selected' : '' }} value="Female">Female</option>
-                                </select>
-                            </div>
-                            <div style="color: red">{{ $errors->first('gender ') }}</div>
-
-                            <div class="form-group col-md-6">
-                                <label>Date of Birth<span style="color: red;"> *</span></label>
-                                <input type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}" required>
-                                <div style="color: red">{{ $errors->first('date_of_birth') }}</div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Caste<span style="color: red;"> *</span></label>
-                                <input type="text" class="form-control" name="Caste" value="{{ old('Caste') }}" required placeholder="Caste">
-                                <div style="color: red">{{ $errors->first('Caste') }}</div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Religion<span style="color: red;"> *</span></label>
-                                <input type="text" class="form-control" name="religion" value="{{ old('religion') }}" required placeholder="Religion">
-                                <div style="color: red">{{ $errors->first('religion') }}</div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Mobile Number<span style="color: red;"> *</span></label>
-                                <input type="text" class="form-control" name="Caste" value="{{ old('mobile_number') }}" required placeholder="Caste">
-                                <div style="color: red">{{ $errors->first('mobile_number') }}</div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Admission Date<span style="color: red;"> *</span></label>
-                                <input type="date" class="form-control" name="adminssion_date" value="{{ old('adminssion_date') }}" required placeholder="Admission Date">
-                                <div style="color: red">{{ $errors->first('adminssion_date') }}</div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Profile Picture<span style="color: red;"> *</span></label>
-                                <input type="file" class="form-control" name="profile_pic">
-                                <div style="color: red">{{ $errors->first('profile_pic') }}</div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Blood Group<span style="color: red;"> *</span></label>
-                                <input type="text" class="form-control" name="blood_group" value="{{ old('blood_group') }}" placeholder="Blood Group">
-                                <div style="color: red">{{ $errors->first('blood_group') }}</div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Height<span style="color: red;"> *</span></label>
-                                <input type="text" class="form-control" name="height" value="{{ old('height') }}" placeholder="Height">
-                                <div style="color: red">{{ $errors->first('height') }}</div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Weight<span style="color: red;"> *</span></label>
-                                <input type="text" class="form-control" name="weight"  value="{{ old('weight') }}" placeholder="Weight">
-                                <div style="color: red">{{ $errors->first('weight') }}</div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>status<span style="color: red;"> *</span></label>
-                                <select class="form-control" required name="status">
-                                    <option value="">Select status</option>
-                                    <option {{ (old('status') == '0') ? 'selected' : '' }} value="0">active</option>
-                                    <option {{ (old('status ') == '1') ? 'selected' : '' }} value="1">inactive</option>
-                                </select>
-                                <div style="color: red">{{ $errors->first('status') }}</div>
-                            </div>
-
                         </div>
-
-                        <hr/>
-                        <div class="form-group">
-                            <label>Email<span style="color: red;"> *</span></label>
-                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="Enter email">
-                            <div style="color: red">{{ $errors->first('email') }}</div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="password">Password<span style="color: red;"> *</span></label>
-                            <input type="password" class="form-control" name="password" required placeholder="Password">
-                            <div style="color: red">{{ $errors->first('password') }}</div>
+                        <!-- /.card-body -->
+                    </div>
+                    @endif
+                    <!-- /.card -->
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Pais</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Foto de Perfil</th>
+                                    <th>Nome do Estudante</th>
+                                    <th>Email</th>
+                                    <th>Nome do Pai</th>
+                                    <th>Data de Criação</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($getRecord as $value)
+                                <tr>
+                                    <td>{{$value->id}}</td>
+                                    <td>
+                                        @if(!empty($value->getProfile()))
+                                        <img src="{{ $value->getProfile() }}" style="width: 50px; width: 50px; border-radius: 50%">
+                                        @endif
+                                    </td>
+                                    <td>{{$value->name}} {{ $value->last_name}}</td>
+                                    <td>{{$value->email}}</td>
+                                    <td>{{$value->parent_name}}</td>
+                                    <td>{{date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
+                                    <td style="min-width: 150px;">
+                                        <a href="{{ url('admin/parent/assign_student_parent_delete/' .$value->id) }}" class="btn btn-danger btn-sm">Excluir Atribuição</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div style="padding: 10px; float: right;">
                         </div>
                     </div>
                     <!-- /.card-body -->
-
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-
+                </div>
+                <!-- /.col -->
             </div>
-
+            <!-- /.row -->
         </div>
-    </div>
-
         <!-- /.row -->
-      </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
-
-  @endsection
+</div>
+@endsection
