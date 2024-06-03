@@ -146,7 +146,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/examinations/avaliation_schedule_insert', [ExaminationController::class, 'avaliation_schedule_insert']);
 
     Route::get('admin/examinations/marks_register', [ExaminationController::class, 'marks_register']);
+<<<<<<< HEAD
     Route::get('admin/examinations/submit_marks_register', [ExaminationController::class, 'submit_marks_register']);
+=======
+    Route::post('admin/examinations/submit_marks_register', [ExaminationController::class, 'submit_marks_register']);
+    Route::post('admin/examinations/single_submit_marks_register', [ExaminationController::class, 'single_submit_marks_register']);
+    
+    
+>>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
     
     
 });
@@ -187,6 +194,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('student/account', [UserController::class, 'UpdateMyAccountStudent']);
     Route::get('student/change_password', [UserController::class, 'change_password']);
     Route::post('student/change_password', [UserController::class, 'update_change_password']);
+
+    
 
 
 });

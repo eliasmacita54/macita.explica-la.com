@@ -61,5 +61,11 @@ static public function getSubject($exam_id, $class_id)
 
     }
 
+    static public function getMark($student_id, $exam_id, $class_id, $subject_id)
+    {
+    return MarksRegisterModel::CheckAlreadyMark($student_id, $exam_id, $class_id, $subject_id);
+    }
+
+
 }
 
