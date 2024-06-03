@@ -29,7 +29,11 @@
                             <h3 class="card-title">Buscar Avaliações</h3>
                         </div>
                         <form method="get" action="">
+<<<<<<< HEAD
+                            {{ csrf_field()}}
+=======
                             {{ csrf_field() }}
+>>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-md-3">
@@ -54,7 +58,11 @@
 
                                     <div class="form-group col-md-3">
                                         <button class="btn btn-primary" type="submit" style="margin-top:30px;">Buscar</button>
+<<<<<<< HEAD
+                                        <a href="{{ url('admin/examinations/marks_register') }}" class="btn btn-success"  style="margin-top:30px;">Redefinir</a>
+=======
                                         <a href="{{ url('admin/examinations/marks_register') }}" class="btn btn-success" style="margin-top:30px;">Redefinir</a>
+>>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +70,11 @@
                     </div>
 
                     @include('_message')
+<<<<<<< HEAD
+                    @if(!empty($getSubject) && !empty($getSubject->count()))
+=======
                     @if(!empty($getSubject) && $getSubject->count())
+>>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Registro de Notas</h3>
@@ -78,6 +90,45 @@
                                         ({{$subject->subject_type}} : {{$subject->passing_mark}} / {{$subject->full_marks}})
                                         </th>
                                         @endforeach
+<<<<<<< HEAD
+                                        <th>Acção</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if(!empty($getSubject) && !empty($getSubject->count()))
+                                    @foreach($getStudent as $student)
+                                    <form name="post" class="SubmitForm"></form>
+                                    {{ csrf_field()}}
+                                    <tr>
+                                        <td>{{ $student->name}} {{ $student->last_name}}</td>
+                                        @foreach($getSubject as $subject)
+                                        <td>
+                                            <div style="margin-bottom:10px">
+                                            Test 1
+                                            <input type="text" name="" style="width:200px" class="form-control">
+                                        </div>
+                                        <div style="margin-bottom:10px">
+                                            Test 2
+                                            <input type="text" name="" style="width:200px" class="form-control">
+                                        </div>
+                                        <div style="margin-bottom:10px">
+                                            Home work(Trabalho de casa)
+                                            <input type="text" name="" style="width:200px" class="form-control">
+                                        </div>
+                                        <div style="margin-bottom:10px">
+                                            Trabalho(Teorico/Pratico)
+                                            <input type="text" name="" style="width:200px" class="form-control">
+                                        </div>
+                                        </td>
+                                        @endforeach
+                                        <td>
+                                            <button type="button" class="btn btn-success">Guardar</button>
+                                        </td>
+                                    </td>
+                                    </tr>
+                                    @endforeach
+                                    @endif
+=======
                                         <th>Ação</th>
                                     </tr>
                                 </thead>
@@ -143,6 +194,7 @@
                                         </form>
                                     </tr>
                                     @endforeach
+>>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
                                 </tbody>
                             </table>
                         </div>
@@ -162,6 +214,24 @@
 @endsection
 
 @section('script')
+<<<<<<< HEAD
+
+<script type="""text/javascript>
+    $('.SubmitForm').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "{{ url('admin/examinations/submit_marks_register') }}",
+            data: $(this).serialize(),
+            dataType : "json",
+            success:function(data) {
+
+            }
+        });
+
+    })
+    </script>
+=======
 <script type="text/javascript">
     $(document).ready(function() {
         $('.SubmitForm').submit(function(e) {
@@ -221,5 +291,6 @@
 
     });
 </script>
+>>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
 
 @endsection
