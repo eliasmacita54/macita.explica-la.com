@@ -6,23 +6,20 @@
    @section('content')
 
    <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- Cabeçalho do Conteúdo (Cabeçalho da Página) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
 
           <div class="col-sm-6">
-            <h1>My Class & Subject </h1>
+            <h1>Minhas Turmas e Disciplinas</h1>
           </div>
-
 
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
-
-
-    <!-- Main content -->
+    <!-- Conteúdo Principal -->
     <section class="content">
 
       <div class="container-fluid">
@@ -30,26 +27,25 @@
           <!-- /.col -->
           <div class="col-md-12">
 
-
             @include('_message')
 
             <!-- /.card -->
 
             <div class="card">
               <div class="card-header">
-                    <h3 class="card-title">My Class & Subject Table</h3>
+                    <h3 class="card-title">Tabela de Minhas Turmas e Disciplinas</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Class Name</th>
-                      <th>Subject Name</th>
-                      <th>Subject Type</th>
-                      <th>My Class Timetable</th>
-                      <th>Created Date </th>
-                      <th>Action</th>
+                      <th>Nome da Turma</th>
+                      <th>Nome da Disciplina</th>
+                      <th>Tipo da Disciplina</th>
+                      <th>Meu Horário de Aula</th>
+                      <th>Data de Criação</th>
+                      <th>Ação</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -64,14 +60,14 @@
                          @endphp
                         @if(!empty($ClassSubject))
 
-                         {{ date('h:i A',strtotime($ClassSubject->start_time)) }} to {{ date('h:i A',strtotime($ClassSubject->end_time)) }}
+                         {{ date('h:i A',strtotime($ClassSubject->start_time)) }} até {{ date('h:i A',strtotime($ClassSubject->end_time)) }}
                         </br>
-                        Room number: {{ $ClassSubject->room_number }}
+                        Sala número: {{ $ClassSubject->room_number }}
                         @endif
                         </td>
                         <td>{{date('d-m-y H:i A', strtotime($value->created_at))}}</td>
                         <td>
-                            <a href="{{ url('teacher/my_class_subject/class_timetable/'.$value->class_id.'/'.$value->subject_id) }}" class="btn btn-primary">My Class Timetable </a>
+                            <a href="{{ url('teacher/my_class_subject/class_timetable/'.$value->class_id.'/'.$value->subject_id) }}" class="btn btn-primary">Meu Horário de Aula</a>
                         </td>
                     </tr>
                 @endforeach

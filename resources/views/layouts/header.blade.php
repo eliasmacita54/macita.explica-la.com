@@ -104,7 +104,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="javascript:;" class="brand-link" style="text-align:center;">
-      <span class="brand-text font-weight-light" style="font-weight: bold !important; font-size:20px;">SigaESSG</span>
+      <span class="brand-text font-weight-light" style="font-weight: bold !important; font-size:20px;">AcademiIQ</span>
     </a>
 
 <!-- Barra Lateral -->
@@ -285,7 +285,7 @@
           <a href="{{url('teacher/my_exam_timetable')}}" class="nav-link @if(Request::segment(2) == 'my_exam_timetable') active @endif">
             <i class="nav-icon far fa-user"></i>
             <p>
-              Meu Horário de Exames
+              Meu Horário de Testes
             </p>
           </a>
         </li>

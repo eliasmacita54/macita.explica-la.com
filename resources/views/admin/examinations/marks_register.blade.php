@@ -29,11 +29,7 @@
                             <h3 class="card-title">Buscar Avaliações</h3>
                         </div>
                         <form method="get" action="">
-<<<<<<< HEAD
                             {{ csrf_field()}}
-=======
-                            {{ csrf_field() }}
->>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-md-3">
@@ -58,11 +54,7 @@
 
                                     <div class="form-group col-md-3">
                                         <button class="btn btn-primary" type="submit" style="margin-top:30px;">Buscar</button>
-<<<<<<< HEAD
                                         <a href="{{ url('admin/examinations/marks_register') }}" class="btn btn-success"  style="margin-top:30px;">Redefinir</a>
-=======
-                                        <a href="{{ url('admin/examinations/marks_register') }}" class="btn btn-success" style="margin-top:30px;">Redefinir</a>
->>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
                                     </div>
                                 </div>
                             </div>
@@ -70,11 +62,7 @@
                     </div>
 
                     @include('_message')
-<<<<<<< HEAD
                     @if(!empty($getSubject) && !empty($getSubject->count()))
-=======
-                    @if(!empty($getSubject) && $getSubject->count())
->>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Registro de Notas</h3>
@@ -90,7 +78,6 @@
                                         ({{$subject->subject_type}} : {{$subject->passing_mark}} / {{$subject->full_marks}})
                                         </th>
                                         @endforeach
-<<<<<<< HEAD
                                         <th>Acção</th>
                                     </tr>
                                 </thead>
@@ -128,7 +115,6 @@
                                     </tr>
                                     @endforeach
                                     @endif
-=======
                                         <th>Ação</th>
                                     </tr>
                                 </thead>
@@ -194,7 +180,6 @@
                                         </form>
                                     </tr>
                                     @endforeach
->>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
                                 </tbody>
                             </table>
                         </div>

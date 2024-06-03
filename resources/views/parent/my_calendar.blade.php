@@ -2,12 +2,10 @@
 
 @section('style')
 <style type="text/css">
-    .fc-daygrid-event
-    {
+    .fc-daygrid-event {
         white-space: normal;
     }
 </style>
-
 @endsection
 
 @section('style')
@@ -16,22 +14,22 @@
 @section('content')
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- Cabeçalho de Conteúdo (Cabeçalho da Página) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>My Calendar <span style="color: blue;">( {{ $getStudent->name }} {{ $getStudent->last_name }} )</span></h1>
+                    <h1>Meu Calendário <span style="color: blue;">( {{ $getStudent->name }} {{ $getStudent->last_name }} )</span></h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
+    <!-- Conteúdo Principal -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <!-- left column -->
+                <!-- Coluna esquerda -->
                 <div class="col-md-12">
                     <div id="calendar"></div>
                 </div>
@@ -58,42 +56,34 @@
             endTime: '{{ $week['end_time'] }}',
             url: '{{ url('student/my_timetable') }}',
         });
-
-
         @endforeach
     @endforeach
 
     @foreach($getExamTimetable as $valueE)
         @foreach($valueE['exam'] as $exam)
         events.push({
-
-            title: '{{ $valueE['name'] }} - {{ $exam['subject_name'] }} ({{ date('h:i A',strtotime($exam['start_time'])) }} to {{ date('h:i A',strtotime($exam['end_time'])) }})',
+            title: '{{ $valueE['name'] }} - {{ $exam['subject_name'] }} ({{ date('h:i A', strtotime($exam['start_time'])) }} to {{ date('h:i A', strtotime($exam['end_time'])) }})',
             start : '{{ $exam['exam_date'] }}',
             end : '{{ $exam['exam_date'] }}',
             color : 'brown',
             url: '{{ url('student/my_exam_timetable') }}',
-
         });
-
         @endforeach
     @endforeach
 
-
-     var calendarEl = document.getElementById('calendar');
-     var calendar = new FullCalendar.Calendar(calendarEl, {
-
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-      },
-      initialDate: '<?=date('Y-m-d')?>',
-      navLinks: true,
-      editable: false,
-      events: events,
-      initialView: 'dayGridMonth',
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        },
+        initialDate: '<?=date('Y-m-d')?>',
+        navLinks: true,
+        editable: false,
+        events: events,
+        initialView: 'dayGridMonth',
     });
     calendar.render();
-
 </script>
 @endsection

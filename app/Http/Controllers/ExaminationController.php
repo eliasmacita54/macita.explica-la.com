@@ -300,7 +300,6 @@ class ExaminationController extends Controller
         {
             $data['getSubject'] = ExamScheduleModel::getSubject($request->get('exam_id'), $request->get('class_id'));
             $data['getStudent'] = User::getStudentClass($request->get('class_id'));
-<<<<<<< HEAD
             //dd($data['getStudent']);
 
         }
@@ -308,16 +307,6 @@ class ExaminationController extends Controller
         return view('admin.examinations.marks_register', $data);
     }
 
-    public function submit_marks_register()
-    {
-
-    }
-
-=======
-        }
-        $data['header_title'] = "Marks Register";
-        return view('admin.examinations.marks_register', $data);
-    }
 
     public function submit_marks_register(Request $request)
 {
@@ -390,6 +379,4 @@ class ExaminationController extends Controller
 
 }
 
-
->>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
 }
