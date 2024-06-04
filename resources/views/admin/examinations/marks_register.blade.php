@@ -29,7 +29,7 @@
                             <h3 class="card-title">Buscar Avaliações</h3>
                         </div>
                         <form method="get" action="">
-                            {{ csrf_field()}}
+                            {{ csrf_field() }}
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-md-3">
@@ -54,7 +54,7 @@
 
                                     <div class="form-group col-md-3">
                                         <button class="btn btn-primary" type="submit" style="margin-top:30px;">Buscar</button>
-                                        <a href="{{ url('admin/examinations/marks_register') }}" class="btn btn-success"  style="margin-top:30px;">Redefinir</a>
+                                        <a href="{{ url('admin/examinations/marks_register') }}" class="btn btn-success" style="margin-top:30px;">Redefinir</a>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                     </div>
 
                     @include('_message')
-                    @if(!empty($getSubject) && !empty($getSubject->count()))
+                    @if(!empty($getSubject) && $getSubject->count())
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Registro de Notas</h3>
@@ -78,43 +78,6 @@
                                         ({{$subject->subject_type}} : {{$subject->passing_mark}} / {{$subject->full_marks}})
                                         </th>
                                         @endforeach
-                                        <th>Acção</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(!empty($getSubject) && !empty($getSubject->count()))
-                                    @foreach($getStudent as $student)
-                                    <form name="post" class="SubmitForm"></form>
-                                    {{ csrf_field()}}
-                                    <tr>
-                                        <td>{{ $student->name}} {{ $student->last_name}}</td>
-                                        @foreach($getSubject as $subject)
-                                        <td>
-                                            <div style="margin-bottom:10px">
-                                            Test 1
-                                            <input type="text" name="" style="width:200px" class="form-control">
-                                        </div>
-                                        <div style="margin-bottom:10px">
-                                            Test 2
-                                            <input type="text" name="" style="width:200px" class="form-control">
-                                        </div>
-                                        <div style="margin-bottom:10px">
-                                            Home work(Trabalho de casa)
-                                            <input type="text" name="" style="width:200px" class="form-control">
-                                        </div>
-                                        <div style="margin-bottom:10px">
-                                            Trabalho(Teorico/Pratico)
-                                            <input type="text" name="" style="width:200px" class="form-control">
-                                        </div>
-                                        </td>
-                                        @endforeach
-                                        <td>
-                                            <button type="button" class="btn btn-success">Guardar</button>
-                                        </td>
-                                    </td>
-                                    </tr>
-                                    @endforeach
-                                    @endif
                                         <th>Ação</th>
                                     </tr>
                                 </thead>
@@ -143,80 +106,64 @@
                                                             <input type="hidden" name="mark[{{ $i }}][subject_id]" value="{{ $subject->subject_id }}">
                                                             <!-- <input type="hidden" name="mark[{{ $i }}][class_work]" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" value="{{ $getMark->class_work ?? 0 }}"> -->
                                                             <!-- <input type="text" style="width:200px;" placeholder="Enter Marks" value="{{ (empty($getMark->class_work) ? '' : $getMark->class_work . ' ') }}" class="form-control"> -->
-                                                            <input type="text" name="mark[{{ $i }}][class_work]" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" style="width:200px;" placeholder="Enter Marks" value="{{ empty($getMark->class_work) ? $getMark->class_work : '' }}" class="form-control">
+                                                            <input type="text" name="mark[{{ $i }}][class_work]" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" style="width:200px;" placeholder="Digite as notas" value="{{ empty($getMark->class_work) ? $getMark->class_work : '' }}" class="form-control">
                                                         </div>
                                                     </div>
 
                                                     <div style="margin-bottom: 10px;">
                                                         <div>
-                                                            <input type="text" id="home_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][home_work]" style="width:200px;" placeholder="Enter Marks" value="{{ (empty($getMark->home_work) ? '' : $getMark->home_work . ' ') }}" class="form-control">
+                                                            <input type="text" id="home_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][home_work]" style="width:200px;" placeholder="Digite as notas" value="{{ (empty($getMark->home_work) ? '' : $getMark->home_work . ' ') }}" class="form-control">
                                                         </div>
                                                     </div>
 
                                                     <div style="margin-bottom: 10px;">
                                                         <div>
-                                                            <input type="text" id="test_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][test_work]" style="width:200px;" placeholder="Enter Marks" value="{{ (empty($getMark->test_work) ? '' : $getMark->test_work . ' ') }}" class="form-control">
+                                                            <input type="text" id="test_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][test_work]" style="width:200px;" placeholder="Digite as notas" value="{{ (empty($getMark->test_work) ? '' : $getMark->test_work . ' ') }}" class="form-control">
                                                         </div>
                                                     </div>
 
                                                     <div style="margin-bottom: 10px;">
                                                         <div>
-                                                            <input type="text" id="exam_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][exam]" style="width:200px;" placeholder="Enter Marks" class="form-control" value="{{ (empty($getMark->exam) ? '' : $getMark->exam . ' ') }}">
+                                                            <input type="text" id="exam_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][exam]" style="width:200px;" placeholder="Digite as notas" class="form-control" value="{{ (empty($getMark->exam) ? '' : $getMark->exam . ' ') }}">
                                                         </div>
                                                     </div>
 
                                                     <div style="margin-bottom: 10px;">
-                                                        <button type="button" class="btn btn-primary SaveSingleSubject" id="{{ $student->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-class="{{ Request::get('class_id') }}">Save</button>
-                                                    </div>
+                                                    <button type="button" class="btn btn-primary SaveSingleSubject" id="{{ $student->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-class="{{ Request::get('class_id') }}">Salvar</button>
+                                                </div>
 
-                                            </td>
-                                            @php
-                                            $i++
-                                            @endphp
-                                            @endforeach
-                                            <td>
-                                                <button type="submit" class="btn btn-success">Guardar</button>
-                                            </td>
-                                        </form>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
+                                        </td>
+                                        @php
+                                        $i++
+                                        @endphp
+                                        @endforeach
+                                        <td>
+                                            <button type="submit" class="btn btn-success">Guardar</button>
+                                        </td>
+                                    </form>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    @endif
-
-                    <!-- /.card -->
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.col -->
+                @endif
+
+                <!-- /.card -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
 </div>
 @endsection
 
 @section('script')
-<<<<<<< HEAD
 
-<script type="""text/javascript>
-    $('.SubmitForm').submit(function(e) {
-        e.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: "{{ url('admin/examinations/submit_marks_register') }}",
-            data: $(this).serialize(),
-            dataType : "json",
-            success:function(data) {
-
-            }
-        });
-
-    })
-    </script>
-=======
 <script type="text/javascript">
     $(document).ready(function() {
         $('.SubmitForm').submit(function(e) {
@@ -229,13 +176,13 @@
                 dataType: "json",
                 success: function(data) {
                     if (data.success) {
-                        alert('Marks successfully submitted!');
+                        alert('Notas enviadas com sucesso!');
                     } else {
-                        alert('Failed to submit marks: ' + data.message);
+                        alert('Falha ao enviar as notas: ' + data.message);
                     }
                 },
                 error: function(xhr, status, error) {
-                    alert('An error occurred while submitting the marks: ' + xhr.responseText);
+                    alert('Ocorreu um erro ao enviar as notas: ' + xhr.responseText);
                 }
             });
         });
@@ -273,6 +220,4 @@
 
     });
 </script>
->>>>>>> b5bb235e3791d4ec3e66f2bd2d9fd41b8214aa98
-
 @endsection

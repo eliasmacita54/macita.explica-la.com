@@ -1,65 +1,77 @@
 @extends('layouts.app')
+    @section('style')
+    <style type="text/css">
+    </style>
 
-@section('style')
-<style type="text/css">
-</style>
-@endsection
+   @section('content')
 
-@section('content')
-<div class="content-wrapper">
-    <!-- Cabeçalho do Conteúdo (Cabeçalho da Página) -->
+   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Minhas Disciplinas</h1>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
+      <div class="container-fluid">
+        <div class="row mb-2">
+
+          <div class="col-sm-6">
+            <h1>My Subject </h1>
+          </div>
+         
+        </div>
+      </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Conteúdo Principal -->
+
+
+    <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Coluna -->
-                <div class="col-md-12">
-                    @include('_message')
 
-                    <!-- Cartão -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Minhas Disciplinas</h3>
-                        </div>
-                        <!-- /.card-header -->
+      <div class="container-fluid">
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-md-12">
+                  
 
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>Tipo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($getRecord as $value)
-                                    <tr>
-                                        <td>{{ $value->subject_name }}</td>
-                                        <td>{{ $value->subject_type }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </div>
-                <!-- /.col -->
+            @include('_message')
+
+            <!-- /.card -->
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">My Subject</h3>
+
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                     
+                      <th>Name</th>
+                      <th>Type</th> 
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($getRecord as $value)
+                    <tr>
+                        <td>{{$value->subject_name}}</td> 
+                        <td>{{$value->subject_type}}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+               
+              </div>
+              <!-- /.card-body -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-</div>
-@endsection
+  </div>
+  @endsection
