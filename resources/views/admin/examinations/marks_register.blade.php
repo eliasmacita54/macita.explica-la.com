@@ -106,7 +106,8 @@
                                                             <input type="hidden" name="mark[{{ $i }}][subject_id]" value="{{ $subject->subject_id }}">
                                                             <!-- <input type="hidden" name="mark[{{ $i }}][class_work]" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" value="{{ $getMark->class_work ?? 0 }}"> -->
                                                             <!-- <input type="text" style="width:200px;" placeholder="Enter Marks" value="{{ (empty($getMark->class_work) ? '' : $getMark->class_work . ' ') }}" class="form-control"> -->
-                                                            <input type="text" name="mark[{{ $i }}][class_work]" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" style="width:200px;" placeholder="Digite as notas" value="{{ empty($getMark->class_work) ? $getMark->class_work : '' }}" class="form-control">
+                                                            
+                                                            <input type="text" name="mark[{{ $i }}][class_work]" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" style="width:200px;" placeholder="Enter Marks" value="{{ isset($getMark) && !empty($getMark->class_work) ? $getMark->class_work : '' }}" class="form-control">
                                                         </div>
                                                     </div>
 
@@ -129,8 +130,8 @@
                                                     </div>
 
                                                     <div style="margin-bottom: 10px;">
-                                                    <button type="button" class="btn btn-primary SaveSingleSubject" id="{{ $student->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-class="{{ Request::get('class_id') }}">Salvar</button>
-                                                </div>
+                                                        <button type="button" class="btn btn-primary SaveSingleSubject" id="{{ $student->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-schedule="{{ $subject->id }}" data-class="{{ Request::get('class_id') }}">Save</button>
+                                                    </div>
 
                                         </td>
                                         @php
@@ -192,9 +193,11 @@
     var subject_id = $(this).attr('data-val');
     var exam_id = $(this).attr('data-exam');
     var class_id = $(this).attr('data-class');
+    var id = $(this).attr('data-schedule');
+    
     var class_work = $('#class_work_' + student_id + subject_id).val();
     var home_work = $('#home_work_' + student_id + subject_id).val();
-    var test_work = $('#test_work_' + student_id + subject_id).val();
+    var test_work = $('#test_work_' + student_id + subject_id).val(); 
     var exam = $('#exam_' + student_id + subject_id).val();
 
     $.ajax({
@@ -202,6 +205,7 @@
         url: "{{ url('admin/examinations/single_submit_marks_register') }}",
         data: {
             '_token': '{{ csrf_token() }}',
+            id : id,
             student_id: student_id,
             subject_id: subject_id,
             exam_id: exam_id,

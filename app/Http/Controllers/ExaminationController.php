@@ -309,42 +309,73 @@ class ExaminationController extends Controller
 
 
     public function submit_marks_register(Request $request)
-{
-    if (!empty($request->mark))
     {
-        foreach ($request->mark as $mark)
-        {
-            $class_work = !empty($mark['class_work']) ? $mark['class_work'] : 0;
-            $home_work = !empty($mark['home_work']) ? $mark['home_work'] : 0;
-            $test_work = !empty($mark['test_work']) ? $mark['test_work'] : 0;
-            $exam = !empty($mark['exam']) ? $mark['exam'] : 0;
+        // Variable to keep track of whether any validation errors occurred
+        $validation = 0;
+        $marks = $request->marks;
+        $json = [];
 
-            $getMark = MarksRegisterModel::CheckAlreadyMark($request->student_id, $request->exam_id, $request->class_id, $mark['subject_id']);
-            if(empty($getMark))
-            {
-                $save = $getMark;
+        if (!empty($marks)) {
+            foreach ($marks as $mark) {
+                $getExamSchedule = ExamScheduleModel::getSingle($mark['id']);
+                $full_marks = $getExamSchedule->full_marks;
+
+                // Default to 0 if any fields are empty
+                $class_work = empty($mark['class_work']) ? 0 : $mark['class_work'];
+                $home_work = empty($mark['home_work']) ? 0 : $mark['home_work'];
+                $test_work = empty($mark['test_work']) ? 0 : $mark['test_work'];
+                $exam = empty($mark['exam']) ? 0 : $mark['exam'];
+
+                // Calculate total marks
+                $total_mark = $class_work + $home_work + $test_work + $exam;
+
+                // Check if total marks exceed full marks
+                if ($full_marks >= $total_mark) {
+                    // Check if a mark already exists
+                    $getMark = MarksRegisterModel::CheckAlreadyMark($request->student_id, $request->exam_id, $request->class_id, $mark['subject_id']);
+
+                    // If mark does not exist, create a new instance. Otherwise, update the existing one.
+                    if (empty($getMark)) {
+                        $save = new MarksRegisterModel;
+                        $save->created_by = Auth::user()->id;
+                    } else {
+                        $save = $getMark;
+                    }
+
+                    // Assign values from the request to the mark instance
+                    $save->student_id = $request->student_id;
+                    $save->exam_id = $request->exam_id;
+                    $save->class_id = $request->class_id;
+                    $save->subject_id = $mark['subject_id'];
+                    $save->class_work = $class_work;
+                    $save->home_work = $home_work;
+                    $save->test_work = $test_work;
+                    $save->exam = $exam;
+
+                    // Save the mark instance
+                    $save->save();
+                } else {
+                    // Set validation flag if total marks exceed full marks
+                    $validation = 1;
+                }
             }
-            else
-            {
-                $save = new MarksRegisterModel;
-                $save->created_by = Auth::user()->id;
+
+            // Check validation flag to set appropriate message
+            if ($validation == 0) {
+                $json['message'] = "Registro de notas salvo com sucesso";
+            } else {
+                $json['message'] = "Registro de notas salvo, mas algumas notas excedem o total permitido.";
             }
-            
-            $save->student_id = $request->student_id;
-            $save->exam_id = $request->exam_id;
-            $save->class_id = $request->class_id;
-            $save->subject_id = $mark['subject_id'];
-            $save->class_work = $class_work;
-            $save->home_work = $home_work;
-            $save->test_work = $test_work;
-            $save->exam = $exam;
-            $save->save();
+        } else {
+            $json['message'] = "Nenhuma nota foi enviada.";
         }
 
-        $json['message'] = "Notas registradas com sucesso!";
-        echo json_encode($json);
-        }
+        // Return JSON response
+        return response()->json($json);
     }
+
+
+
 
     public function single_submit_marks_register(Request $request)
 {
